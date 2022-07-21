@@ -29,28 +29,29 @@ function reverse(message){
         reverseMessage += message[index];
 
         /*Within the scope of the loop, call the push function, which places the value of variable numbers within an array consisting of value of i,*/
-        let currentLetter = message[index];        
+        let currentLetter = message[index]; 
+        
+        /*Create an if-else statemente where if the value of "reversedMessage*/
     }
 
     //Return the vaule for numbers
     return reverseMessage;
 }
 
-/*
-This needs to be within an if statement, with a SwAl declaring if this is or isnt a palindrome
+function palindrome(message){
 
-use regex if possible
+    let message = document.getElementById("tacoMessage").value;
 
-const clean = (str) => str.toLowerCase().replace(/[\W_]/g, '');
+    /*Create a Regular Expression or regex, /, Matches all alpha-numeric values, /[\W], remove underscores, /[\W_], and make it global (go through the entire string), /[\W_]g*/
+    let reg = /[\W_]/g
 
-const isPalindrome = (str) => {
-    const cleanStr = clean(str);
-    const reverseStr = cleanStr.split('').reverse().join('');
-    return reverseStr === cleanStr;
+    /*Create a variable of "smallString" which*/
+    let smallString = message.toLowerCase().replace(reg, "");
+
+    if (smallString === message) return "GIVE THAT CAT A TACO";
+
+    return "NO TACO'S FOR YOU MR. KITTY";
 }
-*/
-
-
 
 //Create the View Function
 
@@ -62,6 +63,7 @@ function displayMessage(revMessage){
 
     //Create a variable of div
     results.classList.add("revMessage");
+
     //if divisble by both
     results.innerHTML = revMessage;
 }
