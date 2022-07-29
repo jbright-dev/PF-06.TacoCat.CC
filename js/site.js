@@ -1,71 +1,70 @@
-//Create the Controller Function
+// 1.Create the Controller Function
 
 //Declare a new function that calls the built in getValues function the numbers
-function getValues(){
+function getValue(){
 
+    //make sure the alert is invisible
+    //document.getElementById("alert").classList.add("invisible");
+
+    //get user strong for the page
     /* Within the scope-block of the function Create variables that are defined as values contained within the elements possesing the id of the scanned the document*/
-    let message = document.getElementById("message").value;
+    let userString = document.getElementById("userString").value;
         
     /*Call the displayValues function using the parameter of numbers, which was passed through from the previous function*/
-    let revMessage = reverse(message);
+    let returnObj = palindromeCheck(userString);
 
     /*Within the else portion  of the statement enter the Sweet Alert*/
-    displayMessage(revMessage);        
+    displayMessage(returnObj);        
 }
 
 
 
-//Create the Business Logic
+// 2. Create the Business Logic
 
-/*Declare a new function which calls the built in generateNumbers function and possesses the parameters of start and stop*/
-function reverse(message){
+//Check if string is palindrome
 
-    //string? array of characters
-    let reverseMessage = "";
+function palindromeCheck(userString){
 
-    //Create a for-loop which declares a variable of i. the variable of i will consist of the previously defined "start" paramenter and as long as "i" is less than the previously defined stop, add 1 to the value. decrementing forloop 
-    for (let index = message.length-1; index >= 0; index--){
+    userString = userString.toLowerCase();
 
-        reverseMessage += message[index];
+    //remove spaces and special characters
+    /*Create a Regular Expression or regex, /, Matches all alpha-numeric values, /[\W], remove underscores, /[\W_], and make it global (go through the entire string), /[\W_]g*/
+    let regex = /[^a-z0-9]/gi;
 
-        /*Within the scope of the loop, call the push function, which places the value of variable numbers within an array consisting of value of i,*/
-        let currentLetter = message[index]; 
+    let returnObj = {};
+
+    userString = userString.replace(regex, "");
+
+    //reverse the string
+    /*Create a variable of "smallString" which*/
+    let revString = [];
+
+    for (let index = userString.length -1; index >= 0; index--) {
         
-        /*Create an if-else statemente where if the value of "reversedMessage*/
+        revString += userString[index];
+        
     }
 
-    //Return the vaule for numbers
-    return reverseMessage;
-}
+    if (revString == userString){
 
-function palindrome(message){
+        returnObj.msg = "Congratulations! You've entered a Palindrome, NOW GIVE THAT CAT A TACO!!!"
 
-    let message = document.getElementById("tacoMessage").value;
+    } 
+    else{
+        returnObj.msg = "Aww man, that's not a Palindrome...NO TACO'S FOR YOU MR. KITTY!!!"
+    }
 
-    /*Create a Regular Expression or regex, /, Matches all alpha-numeric values, /[\W], remove underscores, /[\W_], and make it global (go through the entire string), /[\W_]g*/
-    let reg = /[\W_]/g
-
-    /*Create a variable of "smallString" which*/
-    let smallString = message.toLowerCase().replace(reg, "");
-
-    if (smallString === message) return "GIVE THAT CAT A TACO";
-
-    return "NO TACO'S FOR YOU MR. KITTY";
+    return returnObj;
 }
 
 //Create the View Function
 
 /*Declare a function which calls the built in displayNumbers function and possesses the parameter of numbersArray.*/
-function displayMessage(revMessage){
+function displayMessage(returnObj){
 
     /*Create a variable of results which will be deined as the value contained within the element possesing the Id of "results"*/
-    let results = document.getElementById("results");
-
-    //Create a variable of div
-    results.classList.add("revMessage");
-
-    //if divisble by both
-    results.innerHTML = revMessage;
+    document.getElementById("results").innerHTML = returnObj.msg;
+    document.getElementById("msg"),innerHTML = `Your phrase reversed is: ${returnObj}`;
 }
 
 //ExtraCredit Use Tables
